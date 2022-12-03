@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "name": "Cake",
+  "profit": 5,
+  "ingredients": [
+    {
+      "id": 123,
+      "name": "eggs",
+      "quantity": 2,
+      "cost_price": 5
+    },
+    {
+      "id": 124,
+      "name": "bread",
+      "quantity": 3,
+      "cost_price": 5
+    }
+  ]
+}

@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path("", SwaggerSchemaView.as_view()),
     path('api-auth/', include('rest_framework.urls')),
-    path("accounts/",include("account.urls"))
+    path("accounts/",include("account.urls")),
+    path("bakery/",include("inventory.urls")),
 ]

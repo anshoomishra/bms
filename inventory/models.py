@@ -1,27 +1,35 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+from django.utils import timezone
 from django.conf import settings
+from datetime import timedelta
 
 # Create your models here.
 
 User = settings.AUTH_USER_MODEL
 
-
+def expiration_date():
+    now = timezone.now() + timedelta(days=365)
+    return now
 class Ingredients(models.Model):
     name = models.CharField(max_length=20)
     quantity = models.IntegerField()  # Considering units here
     cost_price = models.FloatField()
     
+    def __str__(self):
+        return self.name
     
 class BakeryItem(models.Model):
     name = models.CharField(max_length=100)
-    ingredients = models.ForeignKey(Ingredients,on_delete=models.CASCADE)
-    created_at = models.DateTimeField()
-    modified_at = models.DateTimeField()
-    expiry_date = models.DateTimeField()
-    created_by = models.ForeignKey(User,on_delete=models.CASCADE)
-    selling_price = models.FloatField()
+    
+    created_at = models.DateTimeField(auto_now=True)
+    modified_at = models.DateTimeField(auto_now_add=True)
+    expiry_date = models.DateTimeField(default=expiration_date,verbose_name='Expirate in')
+    selling_price = models.FloatField(default=10)
     is_available = models.BooleanField(default=True)
+    discount = models.FloatField(default=0.0)
+    cost_price = models.FloatField(default=0.0)
+    profit = models.FloatField(default=0.0)
+    ingredients = models.ManyToManyField(Ingredients)
     
     
     def __str__(self):
