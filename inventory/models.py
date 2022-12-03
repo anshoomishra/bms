@@ -15,11 +15,11 @@ class Ingredients(models.Model):
     
 class BakeryItem(models.Model):
     name = models.CharField(max_length=100)
-    ingredients = models.ForeignKey(Ingredients)
+    ingredients = models.ForeignKey(Ingredients,on_delete=models.CASCADE)
     created_at = models.DateTimeField()
     modified_at = models.DateTimeField()
     expiry_date = models.DateTimeField()
-    created_by = models.ForeignKey(User)
+    created_by = models.ForeignKey(User,on_delete=models.CASCADE)
     selling_price = models.FloatField()
     is_available = models.BooleanField(default=True)
     
@@ -30,8 +30,8 @@ class BakeryItem(models.Model):
 
 class Inventory(models.Model):
     bakery_item = models.ManyToManyField(BakeryItem)
-    sku = models.CharField()
-    slug = models.CharField()
+    sku = models.CharField(max_length=20)
+    slug = models.CharField(max_length=20)
     quantity = models.IntegerField() # number of Bakery Items Available
     
     class Meta:
