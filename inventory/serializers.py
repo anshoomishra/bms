@@ -23,7 +23,6 @@ class BakeryItemsSerializers(serializers.ModelSerializer):
     
     def create(self, validated_data):
         ingredients = validated_data.pop('ingredients')
-        print(ingredients)
         bakery_item = BakeryItem.objects.create(**validated_data)
         total_cost_price_of_ingredient = 0
         ingre_list = []
@@ -38,3 +37,21 @@ class BakeryItemsSerializers(serializers.ModelSerializer):
         bakery_item.save()
         return bakery_item
     
+class IngredientMiniSerializers(serializers.ModelSerializer):
+    """
+    To Add Only Ingredient
+    """
+    class Meta:
+        model = Ingredients
+        fields = ['name','quantity']
+
+
+class BakeryItemsMiniSerializers(serializers.ModelSerializer):
+    """
+    To Add bakery Items along with existing Ingredients
+    """
+    ingredients = IngredientMiniSerializers(many=True)
+    
+    class Meta:
+        model = BakeryItem
+        fields = ['name','created_at','expiry_date','selling_price','is_available','ingredients']

@@ -3,7 +3,7 @@ from rest_framework import views, status
 from rest_framework import authentication, permissions
 from rest_framework.response import Response
 from inventory.models import BakeryItem
-from inventory.serializers import IngredientSerializers,BakeryItemsSerializers
+from inventory.serializers import IngredientSerializers,BakeryItemsSerializers,BakeryItemsMiniSerializers
 
 
 # Create your views here.
@@ -49,6 +49,7 @@ class BakeryProductList(views.APIView):
 
     def get(self,request):
         bakery_items = BakeryItem.objects.all()
-        serializer = BakeryItemsSerializers(bakery_items, many=True)
+        serializer = BakeryItemsMiniSerializers(bakery_items, many=True)
+        print(serializer.data)
         return Response(serializer.data)
 
