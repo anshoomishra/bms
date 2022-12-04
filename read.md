@@ -28,6 +28,7 @@
 
 ---
 
+>   git clone thisrepo
 
 >   py -m venv myenv
 
@@ -239,4 +240,236 @@ Response
     }
 ]
 
+```
+3. Create an Order
+
+```
+Endpoint - http://localhost:8000/orders/submit-order/
+POST
+Token
+
+Request Body 
+
+{
+ "payment_type":"COD",
+ "bakery_item":[
+     9
+ ]
+}
+
+Response - 
+
+{
+    "message": "Thank you for placing your order with us.\nHere's your invoice.",
+    "invoice": {
+        "transaction_id": "512dd8fd2ea046889e54cddd65f3ed05",
+        "buyer": "user_two",
+        "item": null,
+        "order_date": "2022-12-04T21:31:56.534252",
+        "total_amount": 26.25,
+        "payment_type": "COD",
+        "shipping_address": {
+            "id": 3,
+            "first_name": "Anshu",
+            "last_name": "Mishra",
+            "street_address_1": "",
+            "street_address_2": "",
+            "city": "",
+            "city_area": "",
+            "postal_code": "",
+            "country": "AD",
+            "country_area": "",
+            "phone": "+917007975402",
+            "customer": 4
+        }
+    }
+}
+
+```
+4. Order History 
+
+```
+
+End Point - http://localhost:8000/orders/my-orders/
+GET
+Token
+
+Response - 
+
+[
+    {
+        "id": 24,
+        "bakery_item": [
+            9
+        ],
+        "order_id": "3qgxtdn84z",
+        "created_at": "2022-12-04T21:31:56.534252Z",
+        "is_cancelled": false,
+        "payment_type": "COD",
+        "transaction_id": "512dd8fd2ea046889e54cddd65f3ed05",
+        "status": "IP",
+        "total_amount": 26,
+        "buyer": 4,
+        "shipping_address": 3,
+        "billing_address": null
+    },
+    {
+        "id": 23,
+        "bakery_item": [
+            9
+        ],
+        "order_id": "1e2ikq67m3",
+        "created_at": "2022-12-04T21:22:09.670560Z",
+        "is_cancelled": false,
+        "payment_type": "COD",
+        "transaction_id": "8f421982a47841f4afb2394a3e654aee",
+        "status": "IP",
+        "total_amount": 26,
+        "buyer": 4,
+        "shipping_address": 3,
+        "billing_address": null
+    },
+    {
+        "id": 22,
+        "bakery_item": [
+            9
+        ],
+        "order_id": "8nt65yakpg",
+        "created_at": "2022-12-04T21:13:24.429025Z",
+        "is_cancelled": false,
+        "payment_type": "COD",
+        "transaction_id": "79c05eb7edbb4c44811b5c104acb9076",
+        "status": "IP",
+        "total_amount": 26,
+        "buyer": 4,
+        "shipping_address": 3,
+        "billing_address": null
+    },
+    {
+        "id": 21,
+        "bakery_item": [
+            9
+        ],
+        "order_id": "8b9e27uko3",
+        "created_at": "2022-12-04T21:11:31.501408Z",
+        "is_cancelled": false,
+        "payment_type": "COD",
+        "transaction_id": "3742983e8982421ab8e36046ac943251",
+        "status": "IP",
+        "total_amount": 0,
+        "buyer": 4,
+        "shipping_address": 3,
+        "billing_address": null
+    },
+    {
+        "id": 20,
+        "bakery_item": [],
+        "order_id": "2a07x3833m",
+        "created_at": "2022-12-04T21:10:47.122793Z",
+        "is_cancelled": false,
+        "payment_type": "COD",
+        "transaction_id": "b3b9513b2aa346109ccaff7d25245713",
+        "status": "IP",
+        "total_amount": 0,
+        "buyer": 4,
+        "shipping_address": 3,
+        "billing_address": null
+    }
+]
+
+```
+
+5. Order Filter 
+
+```
+End Point - http://localhost:8000/orders/my-orders/filter/?payment_type=COD&is_cancelled=False
+GET
+Token
+
+Request body 
+{
+}
+
+Response - 
+
+[
+    {
+        "id": 24,
+        "bakery_item": [
+            9
+        ],
+        "order_id": "3qgxtdn84z",
+        "created_at": "2022-12-04T21:31:56.534252Z",
+        "is_cancelled": false,
+        "payment_type": "COD",
+        "transaction_id": "512dd8fd2ea046889e54cddd65f3ed05",
+        "status": "IP",
+        "total_amount": 26,
+        "buyer": 4,
+        "shipping_address": 3,
+        "billing_address": null
+    },
+    {
+        "id": 23,
+        "bakery_item": [
+            9
+        ],
+        "order_id": "1e2ikq67m3",
+        "created_at": "2022-12-04T21:22:09.670560Z",
+        "is_cancelled": false,
+        "payment_type": "COD",
+        "transaction_id": "8f421982a47841f4afb2394a3e654aee",
+        "status": "IP",
+        "total_amount": 26,
+        "buyer": 4,
+        "shipping_address": 3,
+        "billing_address": null
+    },
+    {
+        "id": 22,
+        "bakery_item": [
+            9
+        ],
+        "order_id": "8nt65yakpg",
+        "created_at": "2022-12-04T21:13:24.429025Z",
+        "is_cancelled": false,
+        "payment_type": "COD",
+        "transaction_id": "79c05eb7edbb4c44811b5c104acb9076",
+        "status": "IP",
+        "total_amount": 26,
+        "buyer": 4,
+        "shipping_address": 3,
+        "billing_address": null
+    },
+    {
+        "id": 21,
+        "bakery_item": [
+            9
+        ],
+        "order_id": "8b9e27uko3",
+        "created_at": "2022-12-04T21:11:31.501408Z",
+        "is_cancelled": false,
+        "payment_type": "COD",
+        "transaction_id": "3742983e8982421ab8e36046ac943251",
+        "status": "IP",
+        "total_amount": 0,
+        "buyer": 4,
+        "shipping_address": 3,
+        "billing_address": null
+    },
+    {
+        "id": 20,
+        "bakery_item": [],
+        "order_id": "2a07x3833m",
+        "created_at": "2022-12-04T21:10:47.122793Z",
+        "is_cancelled": false,
+        "payment_type": "COD",
+        "transaction_id": "b3b9513b2aa346109ccaff7d25245713",
+        "status": "IP",
+        "total_amount": 0,
+        "buyer": 4,
+        "shipping_address": 3,
+        "billing_address": null
+    }
+]
 ```
